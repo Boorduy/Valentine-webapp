@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bahar, Will You Be My Valentine?</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+        }
+ 
+        body {
+            background: linear-gradient(135deg, #f9d1ff, #ffc0cb);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            overflow: hidden;
+            transition: background 1s ease;
+        }
+         .couple-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 10px;
+    border: 2px solid #ff69b4;
+    }
+        .container {
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(216, 112, 147, 0.4);
+            padding: 40px;
+            max-width: 600px;
+            width: 100%;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.5s ease;
+        }
+ 
+        /* Enhanced Chai Cup */
+        .chai-container {
+            position: relative;
+            margin: 0 auto 30px;
+            width: 200px;
+            height: 200px;
+        }
+ 
+        .chai-cup {
+            position: absolute;
+            width: 120px;
+            height: 140px;
+            background: linear-gradient(to bottom, #c05a4a 0%, #8b3b2e 100%);
+            border-radius: 0 0 25px 25px;
+            left: 50%;
+            bottom: 0;
+            transform: translateX(-50%);
+            box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+        }
+ 
+        .chai-handle {
+            position: absolute;
+            width: 50px;
+            height: 70px;
+            border: 15px solid #c05a4a;
+            border-radius: 50%;
+            left: 75%;
+            bottom: 50px;
+            transform: translateX(-50%);
+        }
+ 
+        .chai-liquid {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            background: radial-gradient(circle, #a52a2a 0%, #8b0000 100%);
+            border-radius: 0 0 20px 20px;
+            left: 50%;
+            bottom: 15px;
+            transform: translateX(-50%);
+        }
+ 
+        .chai-steam {
+            position: absolute;
+            width: 30px;
+            height: 80px;
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 50%;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: steam 3s infinite ease-out;
+        }
+ 
+        .steam-1 {
+            left: 40%;
+            animation-delay: 0.5s;
+        }
+ 
+        .steam-2 {
+            left: 60%;
+            animation-delay: 1s;
+        }
+ 
+        .steam-3 {
+            left: 50%;
+            animation-delay: 1.5s;
+        }
+ 
+        h1 {
+            color: #9370db;
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+ 
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 40px;
+        }
+ 
+        button {
+            padding: 15px 40px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+ 
+        #yes {
+            background: linear-gradient(135deg, #9370db, #8a2be2);
+            color: white;
+        }
+ 
+        #yes:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 12px rgba(147, 112, 219, 0.4);
+        }
+ 
+        #no {
+            background: linear-gradient(135deg, #ff007f, #ff1493);
+            color: white;
+            position: relative;
+        }
+ 
+        #no:hover, #no:active {
+            transform: translateX(calc(var(--dx) * 100px)) translateY(calc(var(--dy) * 100px));
+        }
+ 
+        .heart {
+            position: absolute;
+            font-size: 1.8rem;
+            animation: float 3s infinite;
+            opacity: 0.7;
+            cursor: pointer;
+            transition: all 0.5s ease;
+            z-index: 10;
+        }
+ 
+        .heart:nth-child(1) { top: 10%; left: 5%; animation-delay: 0s; }
+        .heart:nth-child(2) { top: 20%; right: 10%; animation-delay: 1s; }
+        .heart:nth-child(3) { bottom: 30%; left: 15%; animation-delay: 2s; }
+        .heart:nth-child(4) { bottom: 10%; right: 20%; animation-delay: 0.5s; }
+ 
+        /* Enhanced Coraline */
+        .coraline {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            width: 80px;
+            height: 120px;
+            z-index: 5;
+        }
+ 
+        .coraline-hair {
+            position: absolute;
+            width: 60px;
+            height: 25px;
+            background: #0000ff;
+            border-radius: 50% 50% 0 0;
+            top: -5px;
+            left: 10px;
+        }
+ 
+        .coraline-head {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            background: #ff69b4;
+            border-radius: 50%;
+            top: 0;
+            left: 15px;
+        }
+ 
+        .coraline-body {
+            position: absolute;
+            width: 40px;
+            height: 60px;
+            background: #ffff00;
+            top: 45px;
+            left: 20px;
+            border-radius: 10px;
+        }
+ 
+        .coraline-eye {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: black;
+            border-radius: 50%;
+            top: 20px;
+        }
+ 
+        .coraline-eye.left { left: 20px; }
+        .coraline-eye.right { left: 35px; }
+ 
+        .coraline-button {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: #ff0000;
+            border-radius: 50%;
+            top: 70px;
+            left: 30px;
+        }
+ 
+        /* Couple Image */
+        .couple {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            width: 120px;
+            height: 120px;
+            z-index: 5;
+        }
+ 
+        
+        /* Penguin Scene */
+        .penguin-scene {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #a8d8ff, #d1e8ff);
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 100;
+            border-radius: 20px;
+        }
+ 
+        /* Enhanced Penguin - Cartoon Style */
+        .penguin {
+            position: relative;
+            width: 250px;
+            height: 300px;
+            margin-bottom: 30px;
+        }
+ 
+        .penguin-body {
+            position: absolute;
+            width: 180px;
+            height: 220px;
+            background: black;
+            border-radius: 50% 50% 40% 40%;
+            bottom: 0;
+            left: 35px;
+            z-index: 2;
+        }
+ 
+        .penguin-belly {
+            position: absolute;
+            width: 140px;
+            height: 160px;
+            background: white;
+            border-radius: 50% 50% 40% 40%;
+            bottom: 40px;
+            left: 45px;
+            z-index: 3;
+        }
+ 
+        .penguin-head {
+            position: absolute;
+            width: 120px;
+            height: 100px;
+            background: black;
+            border-radius: 50%;
+            top: 0;
+            left: 65px;
+            z-index: 4;
+        }
+ 
+        .penguin-eye {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: white;
+            border-radius: 50%;
+            top: 30px;
+            z-index: 5;
+        }
+ 
+        .penguin-eye.left { left: 75px; }
+        .penguin-eye.right { left: 125px; }
+ 
+        .penguin-pupil {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: black;
+            border-radius: 50%;
+            top: 6px;
+            left: 6px;
+        }
+ 
+        .penguin-beak {
+            position: absolute;
+            width: 40px;
+            height: 20px;
+            background: #ff9900;
+            border-radius: 50%;
+            top: 60px;
+            left: 100px;
+            transform: rotate(-5deg);
+            z-index: 5;
+        }
+ 
+        .penguin-flipper {
+            position: absolute;
+            width: 60px;
+            height: 30px;
+            background: black;
+            border-radius: 50%;
+            top: 100px;
+            z-index: 1;
+        }
+ 
+        .penguin-flipper.left {
+            left: 20px;
+            transform: rotate(-30deg);
+        }
+ 
+        .penguin-flipper.right {
+            left: 170px;
+            transform: rotate(30deg);
+        }
+ 
+        .penguin-feet {
+            position: absolute;
+            width: 40px;
+            height: 34px;
+            background: #ff9900;
+            border-radius: 50%;
+            bottom: 2px;
+            z-index: 3;
+        }
+ 
+        .penguin-feet.left { left: 60px; }
+        .penguin-feet.right { left: 130px; }
+ 
+        .penguin-heart {
+            position: absolute;
+            font-size: 3.5rem;
+            color: #ff007f;
+            top: 80px;
+            left: 100px;
+            animation: pulse 1.5s infinite;
+            z-index: 10;
+            text-shadow: 0 0 10px rgba(255,255,255,0.8);
+        }
+ 
+        .valentine-message {
+            color: #9370db;
+            font-size: 1.8rem;
+            text-align: center;
+            max-width: 90%;
+            margin-top: 20px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+            animation: textFloat 3s infinite;
+        }
+ 
+        @keyframes steam {
+            0% { transform: translate(-50%, 0) scale(1); opacity: 0.7; }
+            50% { transform: translate(-50%, -40px) scale(1.5); opacity: 0.3; }
+            100% { transform: translate(-50%, -80px) scale(2); opacity: 0; }
+        }
+ 
+        @keyframes float {
+            0% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(10deg); }
+            100% { transform: translateY(0) rotate(0deg); }
+        }
+ 
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+ 
+        @keyframes burst {
+            0% { transform: scale(1); opacity: 0.7; }
+            50% { transform: scale(3); opacity: 0.3; }
+            100% { transform: scale(5); opacity: 0; }
+        }
+ 
+        @keyframes textFloat {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0); }
+        }
+ 
+        @media (max-width: 600px) {
+            h1 { font-size: 2rem; }
+            .buttons { flex-direction: column; gap: 15px; }
+            .chai-container { width: 150px; height: 150px; }
+            .valentine-message { font-size: 1.4rem; }
+            .coraline, .couple { transform: scale(0.8); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Removed unnecessary elements -->
+        
+        <div class="chai-container">
+            <div class="chai-cup"></div>
+            <div class="chai-handle"></div>
+            <div class="chai-liquid"></div>
+            <div class="chai-steam"></div>
+            <div class="chai-steam steam-1"></div>
+            <div class="chai-steam steam-2"></div>
+            <div class="chai-steam steam-3"></div>
+        </div>
+        
+        <h1>Bahar, Will you be my Valentine?</h1>
+        
+        <div class="buttons">
+            <button id="yes">Yes</button>
+            <button id="no">No</button>
+        </div>
+        
+        <div class="heart">❤️</div>
+        <div class="heart">❤️</div>
+        <div class="heart">❤️</div>
+        <div class="heart">❤️</div>
+        
+        <!-- Enhanced Coraline -->
+        <div class="coraline">
+            <div class="coraline-head"></div>
+            <div class="coraline-body"></div>
+            <div class="coraline-eye left"></div>
+            <div class="coraline-eye right"></div>
+            <div class="coraline-button"></div>
+        </div>
+        
+        <!-- Couple Image -->
+        <div class="couple">
+            <div class="couple-girl">
+               <img src="gentoo-penguin-pair-holding-hand.png" 
+             alt="Couple Image"
+             class="couple-image">
+            </div>
+            <div class="couple-hands"></div>
+        </div>
+    </div>
+ 
+    <div class="penguin-scene">
+        <div class="penguin">
+            <div class="penguin-body"></div>
+            <div class="penguin-belly"></div>
+            <div class="penguin-head"></div>
+            <div class="penguin-eye left"><div class="penguin-pupil"></div></div>
+            <div class="penguin-eye right"><div class="penguin-pupil"></div></div>
+            <div class="penguin-beak"></div>
+            <div class="penguin-flipper left"></div>
+            <div class="penguin-flipper right"></div>
+            <div class="penguin-feet left"></div>
+            <div class="penguin-feet right"></div>
+            <div class="penguin-heart">❤️</div>
+        </div>
+        <div class="valentine-message">
+            Hoooraaaa, I Hope you liked this Character a midoonam yejooriyan yekam vali I'm glad u said Yes 😊❤️ And Remember how much I love you and apreciate u My Love 💕🦅
+        </div>
+    </div>
+ 
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const noButton = document.getElementById('no');
+            const yesButton = document.getElementById('yes');
+            const container = document.querySelector('.container');
+            const penguinScene = document.querySelector('.penguin-scene');
+            const hearts = document.querySelectorAll('.heart');
+            const body = document.querySelector('body');
+            
+            // Function to make the "No" button escape
+            noButton.addEventListener('mouseover', function() {
+                this.style.setProperty('--dx', Math.random() * 2 - 1);
+                this.style.setProperty('--dy', Math.random() * 2 - 1);
+            });
+            
+            noButton.addEventListener('click', function() {
+                this.style.setProperty('--dx', Math.random() * 2 - 1);
+                this.style.setProperty('--dy', Math.random() * 2 - 1);
+            });
+            
+            // Function for "Yes" button
+            yesButton.addEventListener('click', function() {
+                // Hide the container and show penguin scene
+                container.style.opacity = '0';
+                container.style.transform = 'scale(0.8)';
+                
+                setTimeout(() => {
+                    container.style.display = 'none';
+                    penguinScene.style.display = 'flex';
+                    body.style.background = 'linear-gradient(135deg, #a8d8ff, #d1e8ff)';
+                }, 500);
+            });
+            
+            // Interactive hearts
+            hearts.forEach(heart => {
+                heart.addEventListener('click', function() {
+                    // Add burst animation
+                    this.style.animation = 'none';
+                    this.style.opacity = '1';
+                    this.style.transform = 'scale(1)';
+                    
+                    setTimeout(() => {
+                        this.style.animation = 'burst 0.8s forwards';
+                    }, 10);
+                    
+                    // Reset after animation
+                    setTimeout(() => {
+                        this.style.animation = 'float 3s infinite';
+                        this.style.opacity = '0.7';
+                    }, 1000);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
